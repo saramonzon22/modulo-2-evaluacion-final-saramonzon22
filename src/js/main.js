@@ -17,19 +17,23 @@ function resetSearch(event) {
 /* function searchFunction (event){
   event.preventDefault();
 } */
-const handleUp = () => {
+// acordarte de borrar
+/* const handleClick() = (event) => {
+  event.preventDefault();
   const inputSearchUp = inputSearch.value.toLowerCase();
   const inputSearchFilter = animeSearchList.filter((newSearch) => newSearch.title.toLowerCase().includes(inputSearchUp));
   renderAnime(inputSearchFilter);
-};
+
+} */
 
 
 
-function searchAnime() {
-  const inputSearchAnime = inputSearch.value;
+function handleClick(event) {
+  event.preventDefault();
+  const inputSearchAnime = inputSearch.value.toLowerCase();
   fetch(`https://api.jikan.moe/v4/anime?q=${inputSearchAnime}`)
     .then((response) => response.json())
-    .then((animeSearch) => {// data solo existe en esta variable local
+    .then((animeSearch) => {
       animeSearch = animeSearch.data;
       renderAnime(animeSearch);
     });
@@ -39,9 +43,9 @@ function renderAnime(animeSearch) {
   let html = '';
   for (const singleAnime of animeSearch) {
     if (singleAnime.images.jpg.small_image_url !== 'https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png') {
-      html += `<li class="list-anime list-anime-js"><h2>'${singleAnime.title}'</h2><img class="img-list" src=${singleAnime.images.jpg.image_url}></li>`;
+      html += `<li class="list-anime list-anime-js"><h2 class="title2">'${singleAnime.title}'</h2><img class="img-list" src=${singleAnime.images.jpg.image_url}></li>`;
     } else {
-      html += `<li class="list-anime list-anime-js"><h2>'${singleAnime.title}'</h2><img class="img-list" src='https://via.placeholder.com/210x295/ffffff/666666/?text=TV'></li>`;
+      html += `<li class="list-anime list-anime-js"><h2 class="title2">'${singleAnime.title}'</h2><img class="img-list" src='https://via.placeholder.com/210x295/ffffff/666666/?text=TV'></li>`;
     }
 
   }
@@ -50,6 +54,6 @@ function renderAnime(animeSearch) {
 }
 
 resetButton.addEventListener('click', resetSearch);
-inputSearch.addEventListener('keyup', searchAnime, handleUp);
+searchButton.addEventListener('click', handleClick, renderAnime);
 
 

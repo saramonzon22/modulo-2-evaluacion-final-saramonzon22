@@ -4,6 +4,7 @@
 }
 .container-fav {
     height: 100vh;
+    border: 5px solid black;
 }
 .search-list {
     display: grid;
@@ -14,6 +15,13 @@
 .container-search {
     width: 900px;
     border: 5px solid black;
+}
+.search-list {
+    .title2 {
+        margin-top: 25px;
+        margin-left: 15px;
+
+}
 }
 .list-anime {
     margin-top: 15px;
@@ -28,4 +36,5 @@
     margin-top: 10px;
     margin-bottom: 10px;
     border-radius: 10px;
+    box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.15);
 }
