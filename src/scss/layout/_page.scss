@@ -1,10 +1,14 @@
-.title {
-    font-family: $title_font;
+.body {
+    background: linear-gradient(#F4C95D, #DD7230);
+    
 }
 
 .title2 {
-    text-transform: capitalize;
+    font-family: $title_font;
     
+}
+.title2:first-letter {
+    text-transform: capitalize;
 }
 .button {
     text-transform: capitalize;
@@ -13,4 +17,7 @@
 }
 .search-list {
     list-style: none;
+}
+.back {
+    margin-left: 25px;
 }

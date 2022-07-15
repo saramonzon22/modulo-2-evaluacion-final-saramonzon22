@@ -35,16 +35,13 @@ function searchAnime() {
     });
 }
 
-
-
-
 function renderAnime(animeSearch) {
   let html = '';
   for (const singleAnime of animeSearch) {
     if (singleAnime.images.jpg.small_image_url !== 'https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png') {
-      html += `<li class="list-anime list-anime-js"><h2>'${singleAnime.title}'</h2><img src=${singleAnime.images.jpg.small_image_url}></li>`;
+      html += `<li class="list-anime list-anime-js"><h2>'${singleAnime.title}'</h2><img class="img-list" src=${singleAnime.images.jpg.image_url}></li>`;
     } else {
-      html += `<li class="list-anime list-anime-js"><h2>'${singleAnime.title}'</h2><img src='https://via.placeholder.com/210x295/ffffff/666666/?text=TV'></li>`;
+      html += `<li class="list-anime list-anime-js"><h2>'${singleAnime.title}'</h2><img class="img-list" src='https://via.placeholder.com/210x295/ffffff/666666/?text=TV'></li>`;
     }
 
   }

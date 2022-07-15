@@ -1,0 +1,31 @@
+.section-div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.container-fav {
+    height: 100vh;
+}
+.search-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 15px;
+   
+}
+.container-search {
+    width: 900px;
+    border: 5px solid black;
+}
+.list-anime {
+    margin-top: 15px;
+    display: grid;
+    justify-items: center;
+    align-content: space-between;
+    
+}
+.img-list {
+    width: 150px;
+    height: 150px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
