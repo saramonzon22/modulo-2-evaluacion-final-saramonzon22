@@ -1,0 +1,28 @@
+.header {
+    display: flex;
+    align-items: baseline;
+    gap: 15px;
+    justify-content: center;
+    
+}
+
+.title {
+    font-family: 'Lobster', cursive;
+    
+}
+/* .title:hover {
+    text-shadow: #EA3546 8px 8px;
+    transition: 400ms;
+        
+}
+.tv:hover {
+    text-shadow: #EA3546 8px 8px;
+    transition: 400ms;
+        
+} */
+.header:hover {
+    text-shadow: #F86624 8px 8px;
+    transition: 400ms;
+    z-index: 999;
+
+}
