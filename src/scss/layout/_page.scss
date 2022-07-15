@@ -1,7 +1,13 @@
-body {
-  padding: 2rem;
-  height: 100vh;
-  background-image: url('../images/bg-adalab.png');
-  background-color: $color-bg;
-  font-family: $font-main;
+.title {
+    font-family: $title_font;
+}
+
+.title2 {
+    text-transform: capitalize;
+    
+}
+.button {
+    text-transform: capitalize;
+    width: 80px;
+
 }
