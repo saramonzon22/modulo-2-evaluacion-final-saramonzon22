@@ -5,6 +5,8 @@ const resetButton = document.querySelector('.button-js-reset');
 const inputSearch = document.querySelector('.input-search-js');
 const searchResult = document.querySelector('.search-js');
 const containerSearch = document.querySelector('.container-search-js');
+const listenClick = document.querySelector('.list-anime-js');
+const favouriteList = document.querySelector('.favourites');
 
 let animeSearchList = [];
 let animeSearchFav = [];
@@ -28,16 +30,18 @@ function resetSearch(event) {
 
 function favAnime(event) {
   console.log(event.currentTarget.id);
-  const animeId = event.currentTarget.title;
-  const animeIdfound = animeSearchList.find((anime) => anime.title === animeId);
-  const favouritesAnime = animeSearchFav.findIndex((animeFavSearch) => animeFavSearch.title === animeId);
-  if (favouritesAnime === -1) {
-    animeSearchFav.push(animeIdfound);
-  } else {
-    animeSearchFav.splice(favouritesAnime, 1);
-  }
+  const idAnime = event.currentTarget.id;
+  const animeFound = animeSearchList.find((animeFav) => animeFav.id === idAnime);
+  const favoriteFound = animeSearchFav.findIndex((fav) => fav.id === idAnime);
 
+  if (favoriteFound === -1) {
+    animeSearchFav.push(animeFound);
+  } else {
+    animeSearchFav.splice(animeFound, 1);
+  }
+  renderAnime();
 }
+
 
 function handleClick(event) {
   event.preventDefault();
@@ -56,7 +60,7 @@ function renderAnime(animeDefinitive) {
   let html = '';
   let containerFav = '';
   for (const singleAnime of animeDefinitive) {
-    const favAnimeFound = animeSearchFav.findIndex((fav) => singleAnime.title === fav.title);
+    const favAnimeFound = animeSearchFav.findIndex((fav) => singleAnime.id === fav.title);
     if (favAnimeFound !== -1) {
       containerFav = 'favorite';
     } else {
@@ -64,9 +68,9 @@ function renderAnime(animeDefinitive) {
     }
 
     if (singleAnime.images.jpg.small_image_url !== 'https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png') {
-      html += `<li class="list-anime list-anime-js ${containerFav}"><h2 class="title2">${singleAnime.title}</h2><img class="img-list" src=${singleAnime.images.jpg.image_url}></li>`;
+      html += `<li class="list-anime list-anime-js ${containerFav}" id=${singleAnime.mal_id}><h2 class="title2">${singleAnime.title}</h2><img class="img-list" src=${singleAnime.images.jpg.image_url}></li>`;
     } else {
-      html += `<li class="list-anime list-anime-js"><h2 class="title2">${singleAnime.title}</h2><img class="img-list" src='https://via.placeholder.com/210x295/ffffff/666666/?text=TV'></li>`;
+      html += `<li class="list-anime list-anime-js id=${singleAnime.mal_id}"><h2 class="title2">${singleAnime.title}</h2><img class="img-list" src='https://via.placeholder.com/210x295/ffffff/666666/?text=TV'></li>`;
     }
 
   }
@@ -83,5 +87,6 @@ function animeListen() {
 
 resetButton.addEventListener('click', resetSearch);
 searchButton.addEventListener('click', handleClick, renderAnime);
+listenClick.addEventListener('click', favAnime);
 
 
