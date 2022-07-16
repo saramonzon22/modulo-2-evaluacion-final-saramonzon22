@@ -4,7 +4,7 @@
 }
 .container-fav {
     height: 100vh;
-    border: 5px solid black;
+
 }
 .search-list {
     display: grid;
@@ -14,7 +14,7 @@
 }
 .container-search {
     width: 900px;
-    border: 5px solid black;
+    
 }
 .search-list {
     .title2 {
@@ -43,4 +43,32 @@
 }
 .favorite {
     background-color: #5A7D7C;
+}
+.container-fav .h3 {
+    display: flex;
+    justify-content: center;
+    text-transform: uppercase;
+    margin: 15px;
+    font-family: $title_font;
+}
+.container-search .h3 {
+    display: flex;
+    justify-content: center;
+    text-transform: uppercase;
+    margin: 15px;
+    font-family: $title_font;
+
+}
+.favourites {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-right: 20px;
+    color: white;
+    
+   
+}
+.fav {
+    background-color: #637074;
+
 }

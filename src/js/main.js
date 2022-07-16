@@ -1,92 +1,120 @@
 'use strict';
 
+// ELEMENTOS DEL HTML
+
+const inputSearch = document.querySelector('.input-search-js');
 const searchButton = document.querySelector('.button-js-search');
 const resetButton = document.querySelector('.button-js-reset');
-const inputSearch = document.querySelector('.input-search-js');
 const searchResult = document.querySelector('.search-js');
-const containerSearch = document.querySelector('.container-search-js');
-const listenClick = document.querySelector('.list-anime-js');
 const favouriteList = document.querySelector('.favourites');
 
-let animeSearchList = [];
-let animeSearchFav = [];
+// VARIABLES GLOBALES
 
-function resetSearch(event) {
+let animes = [];
+let favorites = [];
+
+// FUNCIONES
+
+const animeRender = (animeArray) => {
+  let html = '';
+  let classFavorite = '';
+  for (const singleAnime of animeArray) {
+    const favoritesFoundIndex = favorites.findIndex(
+      (fav) => fav.mal_id === singleAnime.mal_id
+    );
+    if (favoritesFoundIndex !== -1) {
+      classFavorite = 'fav';
+    } else {
+      classFavorite = '';
+    }
+    html += `<li class="list-anime list-anime-js ${classFavorite}" id="${singleAnime.mal_id}">`;
+    html += `<h2 class="title2">${singleAnime.title}</h2>`;
+    if (
+      singleAnime.images.jpg.image_url ===
+      'https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png'
+    ) {
+      singleAnime.images.jpg.image_url =
+        'https://via.placeholder.com/210x295/ffffff/666666/?text=TV';
+      html += `<img class="img-list" src="${singleAnime.images.jpg.image_url}" />`;
+    } else {
+      html += `<img class="img-list" src="${singleAnime.images.jpg.image_url}" />`;
+    }
+    html += `</li>`;
+  }
+  return html;
+};
+
+const renderAnimeSearch = () => {
+  let html = animeRender(animes);
+  searchResult.innerHTML = html;
+  listenerSerie();
+};
+
+// handle const, search y click
+const handleSearch = (event) => {
   event.preventDefault();
-  inputSearch.value = '';
+  const inputValue = inputSearch.value.toLowerCase();
+  getDataAPI(inputValue);
+};
 
-}
-/* function searchFunction (event){
-  event.preventDefault();
-} */
-// acordarte de borrar
-/* const handleClick() = (event) => {
-  event.preventDefault();
-  const inputSearchUp = inputSearch.value.toLowerCase();
-  const inputSearchFilter = animeSearchList.filter((newSearch) => newSearch.title.toLowerCase().includes(inputSearchUp));
-  renderAnime(inputSearchFilter);
+const handleClick = (event) => {
+  const idAnime = parseInt(event.currentTarget.id);
+  const animeFound = animes.find(
+    (singleAnime) => singleAnime.mal_id === idAnime
+  );
 
-} */
-
-function favAnime(event) {
-  console.log(event.currentTarget.id);
-  const idAnime = event.currentTarget.id;
-  const animeFound = animeSearchList.find((animeFav) => animeFav.id === idAnime);
-  const favoriteFound = animeSearchFav.findIndex((fav) => fav.id === idAnime);
+  const favoriteFound = favorites.findIndex((fav) => fav.mal_id === idAnime);
 
   if (favoriteFound === -1) {
-    animeSearchFav.push(animeFound);
+    favorites.push(animeFound);
   } else {
-    animeSearchFav.splice(animeFound, 1);
+    favorites.splice(favoriteFound, 1);
   }
-  renderAnime();
+
+  animeRenderFav();
+};
+const animeRenderFav = () => {
+  let html = animeRender(favorites);
+  favouriteList.innerHTML = html;
+  localStorage.setItem('favorites', JSON.stringify(favorites));
+  renderAnimeSearch();
+};
+
+// función que escucha
+
+function listenerSerie() {
+  const liAnime = document.querySelectorAll('.list-anime-js');
+  for (const li of liAnime) {
+    li.addEventListener('click', handleClick);
+  }
 }
 
+// funciones con la api
 
-function handleClick(event) {
-  event.preventDefault();
-  const inputSearchAnime = inputSearch.value.toLowerCase();
-  fetch(`https://api.jikan.moe/v4/anime?q=${inputSearchAnime}`)
+const getDataAPI = (inputValue) => {
+  fetch(`https://api.jikan.moe/v4/anime?q=${inputValue}`)
     .then((response) => response.json())
-    .then((animeSearch) => {
-      animeSearch = animeSearch.data;
-      localStorage.setItem('animeSearch', (JSON.stringify(animeSearch)));
-      renderAnime(animeSearch);
-
+    .then((data) => {
+      animes = data.data;
+      renderAnimeSearch();
     });
-}
+};
+const dataLS = JSON.parse(localStorage.getItem('favorites'));
 
-function renderAnime(animeDefinitive) {
-  let html = '';
-  let containerFav = '';
-  for (const singleAnime of animeDefinitive) {
-    const favAnimeFound = animeSearchFav.findIndex((fav) => singleAnime.id === fav.title);
-    if (favAnimeFound !== -1) {
-      containerFav = 'favorite';
-    } else {
-      containerFav = '';
-    }
+function onLoad() {
+  console.log(favorites);
+  if (dataLS !== null) {
+    favorites = dataLS;
 
-    if (singleAnime.images.jpg.small_image_url !== 'https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png') {
-      html += `<li class="list-anime list-anime-js ${containerFav}" id=${singleAnime.mal_id}><h2 class="title2">${singleAnime.title}</h2><img class="img-list" src=${singleAnime.images.jpg.image_url}></li>`;
-    } else {
-      html += `<li class="list-anime list-anime-js id=${singleAnime.mal_id}"><h2 class="title2">${singleAnime.title}</h2><img class="img-list" src='https://via.placeholder.com/210x295/ffffff/666666/?text=TV'></li>`;
-    }
-
-  }
-  searchResult.innerHTML = html;
-  animeListen();
-
-}
-function animeListen() {
-  const listAnimeJs = document.querySelectorAll('.list-anime-js');
-  for (const oneAnime of listAnimeJs) {
-    oneAnime.addEventListener('click', favAnime);
+    console.log(favorites);
+    animeRenderFav();
+  } else {
+    favouriteList.innerHTML = '';
   }
 }
 
-resetButton.addEventListener('click', resetSearch);
-searchButton.addEventListener('click', handleClick, renderAnime);
-listenClick.addEventListener('click', favAnime);
+// eventos y funciones que se ejecutan
 
-
+searchButton.addEventListener('click', handleSearch);
+inputSearch.addEventListener('keyup', handleSearch);
+onLoad();
