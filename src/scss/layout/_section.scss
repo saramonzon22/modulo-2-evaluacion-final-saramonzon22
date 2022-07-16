@@ -31,7 +31,12 @@
     background-color: #A0C1D1;
     border-radius: 30px;
     height: 350px;
+    box-shadow: 0 15px 15px 0 rgba(0, 0, 0, 0.15);
     
+}
+.list-anime:hover {
+    transition: 300ms;
+    transform: scale(1.1);
 }
 .img-list {
     width: 150px;
@@ -41,9 +46,7 @@
     border-radius: 10px;
     box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.15);
 }
-.favorite {
-    background-color: #5A7D7C;
-}
+
 .container-fav .h3 {
     display: flex;
     justify-content: center;
@@ -69,6 +72,11 @@
    
 }
 .fav {
-    background-color: #637074;
+    background-color: #498C8A;
+    box-shadow: 0 15px 15px 0 rgba(0, 0, 0, 0.15);
+}
+.fav:hover {
+    transition: 300ms;
+    transform: scale(1.1);
 
 }
