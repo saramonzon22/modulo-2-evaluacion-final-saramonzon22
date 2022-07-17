@@ -4,7 +4,9 @@
 }
 .container-fav {
     height: 100vh;
-
+    width: 500px;
+    margin-left: 20px;
+    
 }
 .search-list {
     display: grid;
@@ -14,12 +16,14 @@
 }
 .container-search {
     width: 900px;
-    
+    margin-right: 20px;
+        
 }
 .search-list {
-    .title2 {
+    .title2{
         margin-top: 25px;
-        margin-left: 15px;
+        padding-left: 10px;
+        font-family: $anime_title;
 
 }
 }
@@ -32,6 +36,7 @@
     border-radius: 30px;
     height: 350px;
     box-shadow: 0 15px 15px 0 rgba(0, 0, 0, 0.15);
+    
     
 }
 .list-anime:hover {
@@ -51,15 +56,27 @@
     display: flex;
     justify-content: center;
     text-transform: uppercase;
-    margin: 15px;
+    margin-top: 35px;
+    margin-bottom: 15px;
     font-family: $title_font;
+    height: 30px;
+    background-color: #A93F55;
+    align-items: center;
+    width: 480px;
+    border-radius: 10px;
+    
 }
 .container-search .h3 {
     display: flex;
     justify-content: center;
     text-transform: uppercase;
-    margin: 15px;
     font-family: $title_font;
+    margin-top: 35px;
+    margin-bottom: 15px;
+    height: 30px;
+    background-color: #A93F55;
+    align-items: center;
+    border-radius: 10px;
 
 }
 .favourites {
@@ -68,15 +85,27 @@
     gap: 15px;
     margin-right: 20px;
     color: white;
+    border: inset 5px #A93F55;
+    padding: 20px;
+    
     
    
 }
 .fav {
-    background-color: #498C8A;
+    background-color: #540D6E;
     box-shadow: 0 15px 15px 0 rgba(0, 0, 0, 0.15);
 }
 .fav:hover {
     transition: 300ms;
     transform: scale(1.1);
 
+}
+.fav {
+    .title2{
+        margin-top: 25px;
+        padding-left: 10px;
+        font-family: $anime_title;
+        
+
+}
 }

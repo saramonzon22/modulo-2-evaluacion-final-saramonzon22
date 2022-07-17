@@ -101,12 +101,9 @@ const getDataAPI = (inputValue) => {
 };
 const dataLS = JSON.parse(localStorage.getItem('favorites'));
 
-function onLoad() {
-  console.log(favorites);
+function initPage() {
   if (dataLS !== null) {
     favorites = dataLS;
-
-    console.log(favorites);
     animeRenderFav();
   } else {
     favouriteList.innerHTML = '';
@@ -117,4 +114,4 @@ function onLoad() {
 
 searchButton.addEventListener('click', handleSearch);
 inputSearch.addEventListener('keyup', handleSearch);
-onLoad();
+initPage();
