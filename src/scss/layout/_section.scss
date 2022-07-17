@@ -1,10 +1,11 @@
 .section-div {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    width: 100%;
 }
 .container-fav {
     height: 100vh;
-    width: 500px;
+    width: 33vw;
     margin-left: 20px;
     
 }
@@ -15,7 +16,7 @@
    
 }
 .container-search {
-    width: 900px;
+    width: 60vw;
     margin-right: 20px;
         
 }
@@ -87,7 +88,7 @@
     color: white;
     border: inset 5px #A93F55;
     padding: 20px;
-    
+  
     
    
 }
