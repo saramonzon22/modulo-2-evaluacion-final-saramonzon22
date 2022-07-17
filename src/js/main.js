@@ -113,5 +113,4 @@ function initPage() {
 // eventos y funciones que se ejecutan
 
 searchButton.addEventListener('click', handleSearch);
-inputSearch.addEventListener('keyup', handleSearch);
 initPage();
