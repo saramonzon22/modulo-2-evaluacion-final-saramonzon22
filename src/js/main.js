@@ -30,14 +30,12 @@ const animeRender = (animeArray) => {
     html += `<li class="list-anime list-anime-js ${classFavorite}" id="${singleAnime.mal_id}">`;
     html += `<h2 class="title2">${singleAnime.title}</h2>`;
     if (
-      singleAnime.images.jpg.image_url ===
+      singleAnime.images.jpg.small_image_url !==
       'https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png'
     ) {
-      singleAnime.images.jpg.image_url =
-        'https://via.placeholder.com/210x295/ffffff/666666/?text=TV';
-      html += `<img class="img-list" src="${singleAnime.images.jpg.image_url}" />`;
+      html += `<img class="img-list" src=${singleAnime.images.jpg.image_url}>`;
     } else {
-      html += `<img class="img-list" src="${singleAnime.images.jpg.image_url}" />`;
+      html += `<img class="img-list" src='https://via.placeholder.com/210x295/ffffff/666666/?text=TV'>`;
     }
     html += `</li>`;
   }
