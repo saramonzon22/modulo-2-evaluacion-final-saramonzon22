@@ -7,6 +7,7 @@ const searchButton = document.querySelector('.button-js-search');
 const resetButton = document.querySelector('.button-js-reset');
 const searchResult = document.querySelector('.search-js');
 const favouriteList = document.querySelector('.favourites');
+const animeList = document.querySelector('.list-anime-js');
 
 // VARIABLES GLOBALES
 
@@ -107,7 +108,11 @@ function initPage() {
     favouriteList.innerHTML = '';
   }
 }
+function resetData() {
+  localStorage.removeItem('favorites');
+}
 
+resetButton.addEventListener('click', resetData);
 // eventos y funciones que se ejecutan
 
 searchButton.addEventListener('click', handleSearch);
