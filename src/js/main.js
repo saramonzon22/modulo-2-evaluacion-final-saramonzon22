@@ -8,6 +8,7 @@ const resetButton = document.querySelector('.button-js-reset');
 const searchResult = document.querySelector('.search-js');
 const favouriteList = document.querySelector('.favourites');
 const animeList = document.querySelector('.list-anime-js');
+const close = document.querySelector('.close');
 
 // VARIABLES GLOBALES
 
@@ -25,23 +26,44 @@ const animeRender = (animeArray) => {
     );
     if (favoritesFoundIndex !== -1) {
       classFavorite = 'fav';
+      html += `<li class="list-anime list-anime-js ${classFavorite}" id="${singleAnime.mal_id}">`;
+      html += `<div class="img-cont"><h2 class="title2">${singleAnime.title}</h2>`;
+      html += `<i class="fa-solid fa-xmark close"></i></div>`;
+      if (
+        singleAnime.images.jpg.small_image_url !==
+        'https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png'
+      ) {
+        html += `<img class="img-list" src=${singleAnime.images.jpg.image_url}>`;
+      } else {
+        html += `<img class="img-list" src='https://via.placeholder.com/210x295/ffffff/666666/?text=TV'>`;
+      }
+
+
+      html += `</li>`;
     } else {
       classFavorite = '';
+      html += `<li class="list-anime list-anime-js ${classFavorite}" id="${singleAnime.mal_id}">`;
+      html += `<h2 class="title2">${singleAnime.title}</h2>`;
+      if (
+        singleAnime.images.jpg.small_image_url !==
+        'https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png'
+      ) {
+        html += `<img class="img-list" src=${singleAnime.images.jpg.image_url}>`;
+      } else {
+        html += `<img class="img-list" src='https://via.placeholder.com/210x295/ffffff/666666/?text=TV'>`;
+      }
+
+
+      html += `</li>`;
     }
-    html += `<li class="list-anime list-anime-js ${classFavorite}" id="${singleAnime.mal_id}">`;
-    html += `<h2 class="title2">${singleAnime.title}</h2>`;
-    if (
-      singleAnime.images.jpg.small_image_url !==
-      'https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png'
-    ) {
-      html += `<img class="img-list" src=${singleAnime.images.jpg.image_url}>`;
-    } else {
-      html += `<img class="img-list" src='https://via.placeholder.com/210x295/ffffff/666666/?text=TV'>`;
-    }
-    html += `</li>`;
+
+
   }
   return html;
+
 };
+
+/* */
 
 const renderAnimeSearch = () => {
   let html = animeRender(animes);
@@ -111,6 +133,7 @@ function initPage() {
 function resetData() {
   localStorage.removeItem('favorites');
 }
+
 
 resetButton.addEventListener('click', resetData);
 // eventos y funciones que se ejecutan

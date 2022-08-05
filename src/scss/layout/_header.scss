@@ -7,16 +7,20 @@
     border: solid 5px black;
     height: 50px;
     border-radius: 15px;
+    animation: alternate;
+    animation-direction: reverse;
     
 }
 .header-div:hover {
-    text-shadow: #5E0B15 8px 8px;
+    text-shadow: #284B63 20px 30px;
+   
     transition: 400ms;
     z-index: 999;
+
 }
 .header {
     transition: text-shadow 0.8s linear 0.4s;
-    background: #f1bd57;
+    background: #FBD1A2;
     display: flex;
     justify-content: center;
     align-items: center;
